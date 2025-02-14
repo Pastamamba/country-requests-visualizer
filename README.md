@@ -31,3 +31,15 @@ A dynamic React application that visualizes country-specific request data on a w
 
 - [Node.js](https://nodejs.org/) (version 14 or higher recommended)
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) as a package manager
+
+---
+
+### Contributing
+
+Contributions are welcome! Feel free to open an issue for ideas, or submit a pull request to improve the project.
+
+- Fork the repository
+- Create a feature branch (git checkout -b feature/new-feature)
+- Commit your changes (git commit -m 'Add a new feature')
+- Push to the branch (git push origin feature/new-feature)
+- Open a Pull Request in the repository
