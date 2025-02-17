@@ -27,7 +27,7 @@ const MapChart = () => {
     }, []);
 
     // Create a linear color scale based on the maximum requests
-    const colorScale = scaleLinear()
+    const colorScale = scaleLinear<string>()
         .domain([0, maxRequest])
         .range(["#c9f0f3", "#169dd3"]);
 
