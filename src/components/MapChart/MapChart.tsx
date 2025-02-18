@@ -85,7 +85,7 @@ const MapChart = () => {
     }, [data, searchQuery]);
 
     const handleSearchSelect = useCallback(
-        (countryName: string, geo: any) => {
+        (_countryName: string, geo: any) => {
             const centroid = geoCentroid(geo);
             setPosition({ coordinates: centroid, zoom: 3 });
             setSearchQuery("");
@@ -118,7 +118,7 @@ const MapChart = () => {
                     id="worldmap-1"
                 />
                 <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
-                <ZoomableGroup center={position.coordinates} zoom={position.zoom} onMoveEnd={handleMoveEnd}>
+                <ZoomableGroup center={[position.coordinates[0], position.coordinates[1]]} zoom={position.zoom} onMoveEnd={handleMoveEnd}>
                     <Geographies geography={geoUrl}>
                         {({ geographies }) => {
                             const resultsWithGeo = searchQuery
@@ -136,11 +136,6 @@ const MapChart = () => {
                                         const d = data.find(
                                             (s: CountryData) => s.countryName === geo.properties.name
                                         );
-                                        const isSearched =
-                                            searchQuery &&
-                                            geo.properties.name
-                                                .toLowerCase()
-                                                .includes(searchQuery.toLowerCase());
 
                                         const isHighlighted =
                                             searchQuery &&
