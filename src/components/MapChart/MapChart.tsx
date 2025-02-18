@@ -141,19 +141,27 @@ const MapChart = () => {
                                             geo.properties.name
                                                 .toLowerCase()
                                                 .includes(searchQuery.toLowerCase());
+
+                                        const isHighlighted =
+                                            searchQuery &&
+                                            geo.properties.name.toLowerCase().includes(searchQuery.toLowerCase());
                                         return (
                                             <Geography
                                                 key={geo.rsmKey}
                                                 geography={geo}
                                                 stroke="white"
                                                 strokeWidth={0.5}
-                                                fill={d ? String(colorScale(parseInt(d.requests, 10))) : "#c9f0f3"}
+                                                fill={d ? String(colorScale(parseInt(d.requests, 10))) : "#EEE"}
                                                 style={{
-                                                    default: { outline: "none" },
+                                                    default: {
+                                                        outline: "none",
+                                                        stroke: isHighlighted ? "red" : "white",
+                                                        strokeWidth: isHighlighted ? 2 : 0.5
+                                                    },
                                                     hover: {
                                                         outline: "none",
-                                                        stroke: isSearched ? "red" : "#F53",
-                                                        strokeWidth: isSearched ? 2 : 0.5
+                                                        stroke: "red",
+                                                        strokeWidth: 2
                                                     },
                                                     pressed: { outline: "none" }
                                                 }}
