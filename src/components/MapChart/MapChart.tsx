@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { scaleLinear } from "d3-scale";
-import { geoCentroid } from "d3-geo";
 import {
     ComposableMap,
     Geographies,
@@ -11,7 +10,7 @@ import {
 } from "react-simple-maps";
 import SearchInput from "./SearchInput";
 import Tooltip from "./Tooltip";
-import { CountryData } from "./types/MapChartTypes";
+import {CountryData, GeographyFeature, MapPosition} from "./types/MapChartTypes";
 import "./MapChart.css";
 
 const geoUrl = "/features.json";
@@ -48,7 +47,7 @@ const MapChart = () => {
     );
 
     const handleMouseEnter = useCallback(
-        (evt: React.MouseEvent, geo: any) => {
+        (evt: React.MouseEvent<SVGPathElement, MouseEvent>, geo: GeographyFeature) => {
             const countryData = data.find(
                 (s: CountryData) => s.countryName === geo.properties.name
             );
@@ -66,29 +65,12 @@ const MapChart = () => {
         setHoveredCountryRequests(null);
     }, []);
 
-    const handleMoveEnd = useCallback((newPosition: any) => {
+    const handleMoveEnd = useCallback((newPosition: MapPosition) => {
         setPosition(newPosition);
     }, []);
 
-    const searchResults = useMemo(() => {
-        if (!searchQuery) return [];
-        return data.filter((country) =>
-            country.countryName.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-    }, [data, searchQuery]);
-
-    const handleSearchSelect = useCallback(
-        (_countryName: string, geo: any) => {
-            const centroid = geoCentroid(geo);
-            setPosition({ coordinates: centroid, zoom: 3 });
-            setSearchQuery("");
-        },
-        []
-    );
-
     return (
         <div className="map-chart-container">
-            {/* Hakukenttä */}
             <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
             <ComposableMap
@@ -104,7 +86,7 @@ const MapChart = () => {
                 />
                 <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
                 <ZoomableGroup
-                    center={position.coordinates}
+                    center={[position.coordinates[0], position.coordinates[0]]}
                     zoom={position.zoom}
                     onMoveEnd={handleMoveEnd}
                 >
@@ -145,7 +127,6 @@ const MapChart = () => {
                 </ZoomableGroup>
             </ComposableMap>
 
-            {/* Tooltip */}
             {hoveredCountry && (
                 <Tooltip
                     x={tooltipPosition.x}
