@@ -1,0 +1,31 @@
+.map-chart-container {
+    width: 90%;
+    position: relative;
+    margin: 0 auto;
+}
+
+.search-input-container {
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.search-input {
+    padding: 6px;
+    width: 200px;
+}
+
+.tooltip {
+    position: fixed;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.reset-button {
+    margin-top: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
