@@ -74,6 +74,8 @@ A dynamic React application that visualizes country-specific request data on a w
 - D3 Scale: For generating color scales based on data values.
 - React Simple Maps: Library for building SVG maps in React.
 - Vite: Fast development server and build tool.
+- Prettier: Automatic code formatting for consistent styling.
+- ESLint: Linter for catching errors and enforcing best practices.
 
 ---
 
